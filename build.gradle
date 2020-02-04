@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+}
+
+group = 'ru.bifacial.loggermine'
+archivesBaseName = 'Loggermine'
+version = '4.0'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+compileJava.options.encoding = 'UTF-8'
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    compile name: "bukkit-1.7.10"
+    compile name: "craftbukkit-1.7.10"
+    compile name: "permissionsex-1.23.4"
+}

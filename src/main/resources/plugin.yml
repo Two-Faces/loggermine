@@ -1,0 +1,8 @@
+name: LoggerMine
+main: ru.bifacial.loggermine.Main
+version: 0.0.1
+author: Bifacial
+commands:
+  loggermine:
+    description: LoggerMine
+    usage: /<command>
