@@ -21,6 +21,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 public class Main extends JavaPlugin implements Listener {
     public void onEnable() {
@@ -77,12 +78,15 @@ public class Main extends JavaPlugin implements Listener {
     }
 
     public String World(Player player) {
-        World world = player.getWorld();
-        return world.getName();
+        return player.getWorld().getName();
     }
 
     public String Line(Player player, String message) {
-        return this.World(player) + "," + this.Cords(player) + "," + this.DateTime("dd-MM-yyyy kk:mm:ss") + "," + this.Login(player) + "," + message;
+        return this.World(player) + "," + this.Cords(player) + "," + this.DateTime("dd-MM-yyyy kk:mm:ss") + "," + this.Prefix(player) + "," + this.Login(player) + "," + message;
+    }
+
+    public String Prefix(Player player) {
+        return PermissionsEx.getUser(player).getPrefix();
     }
 
     public String Login(Player player) {
@@ -90,8 +94,7 @@ public class Main extends JavaPlugin implements Listener {
     }
 
     public String DateTime(String format) {
-        Calendar date = new GregorianCalendar();
-        return (new SimpleDateFormat(format)).format(date.getTime());
+        return (new SimpleDateFormat(format)).format(new GregorianCalendar().getTime());
     }
 
     public File Filed(String path, String name) throws Exception {

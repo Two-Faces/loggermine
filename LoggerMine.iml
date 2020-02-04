@@ -19,5 +19,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="craftbukkit-1.7.10-R0.1-20140808.005431-8" level="project" />
+    <orderEntry type="library" name="PermissionsEx-1.22.10" level="project" />
   </component>
 </module>
