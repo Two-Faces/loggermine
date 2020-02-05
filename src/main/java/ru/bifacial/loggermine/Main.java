@@ -4,13 +4,11 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -127,17 +125,17 @@ public class Main extends JavaPlugin implements Listener {
     }
 
     @EventHandler(
-            priority = EventPriority.HIGH
+            priority = EventPriority.LOWEST
     )
     public void SaveKiller(PlayerDeathEvent e) throws Exception {
-        Player player = e.getEntity().getPlayer();
-        if (this.getConfig().getBoolean("LogKillerUser")) {
+        if (this.getConfig().getBoolean("LogKillerUser") && e.getEntity() != null) {
+            Player player = e.getEntity().getPlayer();
             Player killer = e.getEntity().getKiller();
 
             double damage = killer.getLastDamageCause().getFinalDamage();
             File file = this.Filed("LoggerMine/logs/killers/", "list");
 
-            this.Logs(file, this.World(player) + "," + this.Cords(player) + "," + this.DateTime("dd-MM-yyyy kk:mm:ss") + "," + damage + "," + player.getDisplayName() + "," + killer.getDisplayName());
+            this.Logs(file, this.World(player) + "," + this.Cords(player) + "," + this.DateTime("dd-MM-yyyy kk:mm:ss") + "," + damage + "," + player.getDisplayName() + ":" + player.getLevel() + "," + killer.getDisplayName());
         }
 
     }
