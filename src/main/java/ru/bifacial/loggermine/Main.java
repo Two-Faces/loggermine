@@ -19,7 +19,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.plugin.java.JavaPlugin;
-import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 public class Main extends JavaPlugin implements Listener {
     public void onEnable() {
@@ -80,11 +79,7 @@ public class Main extends JavaPlugin implements Listener {
     }
 
     public String Line(Player player, String message) {
-        return this.World(player) + "," + this.Cords(player) + "," + this.DateTime("dd-MM-yyyy kk:mm:ss") + "," + this.Prefix(player) + "," + this.Login(player) + "," + message;
-    }
-
-    public String Prefix(Player player) {
-        return PermissionsEx.getUser(player).getPrefix();
+        return this.World(player) + "," + this.Cords(player) + "," + this.DateTime("dd-MM-yyyy kk:mm:ss") + "," + this.Login(player) + "," + message;
     }
 
     public String Login(Player player) {
