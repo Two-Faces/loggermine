@@ -11,6 +11,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -53,7 +54,7 @@ public class Main extends JavaPlugin implements Listener {
     }
 
     public void createConfig() {
-        this.getConfig().options().header("Plugin by Newmine Team");
+        this.getConfig().options().header("Plugin by Bifacial");
         if (!this.getConfig().isBoolean("LogCommand")) {
             this.getConfig().set("LogCommand", true);
         }
@@ -123,14 +124,16 @@ public class Main extends JavaPlugin implements Listener {
             priority = EventPriority.LOWEST
     )
     public void SaveKiller(PlayerDeathEvent e) throws Exception {
-        if (this.getConfig().getBoolean("LogKillerUser") && e.getEntity() != null) {
-            Player player = e.getEntity().getPlayer();
-            Player killer = e.getEntity().getKiller();
+        Player p = e.getEntity();
+        LivingEntity killer = p.getKiller();
+
+        if (this.getConfig().getBoolean("LogKillerUser") && killer instanceof Player) {
+            Player player = p.getPlayer();
 
             double damage = killer.getLastDamageCause().getFinalDamage();
-            File file = this.Filed("LoggerMine/logs/killers/", "list");
+            File file = this.Filed("LoggerMine/logs/killers/", this.DateTime("dd-MM-yyyy"));
 
-            this.Logs(file, this.World(player) + "," + this.Cords(player) + "," + this.DateTime("dd-MM-yyyy kk:mm:ss") + "," + damage + "," + player.getDisplayName() + ":" + player.getLevel() + "," + killer.getDisplayName());
+            this.Logs(file, this.World(player) + "," + this.Cords(player) + "," + this.DateTime("dd-MM-yyyy kk:mm:ss") + "," + damage + "," + player.getDisplayName() + ":" + player.getLevel() + "," + ((Player) killer).getDisplayName());
         }
 
     }
