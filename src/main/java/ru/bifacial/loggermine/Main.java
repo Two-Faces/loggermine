@@ -129,12 +129,15 @@ public class Main extends JavaPlugin implements Listener {
 
         if (this.getConfig().getBoolean("LogKillerUser") && killer instanceof Player) {
             Player player = p.getPlayer();
+            Player k = (Player) killer;
 
-            double damage = killer.getLastDamageCause().getFinalDamage();
-            String hand = ((Player) killer).getItemInHand().getType().toString();
+            double damage = k.getLastDamageCause().getFinalDamage();
+            String hand = k.getItemInHand().getType().toString();
+            String enchants = new EnchantParser().parse(k.getItemInHand().getEnchantments());
+
             File file = this.Filed("LoggerMine/logs/killers/", this.DateTime("dd-MM-yyyy"));
 
-            this.Logs(file, this.World(player) + "," + this.Cords(player) + "," + this.DateTime("dd-MM-yyyy kk:mm:ss") + "," + damage + "," + player.getDisplayName() + ":" + player.getLevel() + "," + ((Player) killer).getDisplayName() + ":" + hand);
+            this.Logs(file, this.World(player) + "," + this.Cords(player) + "," + this.DateTime("dd-MM-yyyy kk:mm:ss") + "," + damage + "," + player.getDisplayName() + ":" + player.getLevel() + "," + k.getDisplayName() + "/" + hand + ":" + enchants);
         }
 
     }
