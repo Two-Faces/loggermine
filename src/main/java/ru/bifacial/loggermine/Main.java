@@ -131,9 +131,10 @@ public class Main extends JavaPlugin implements Listener {
             Player player = p.getPlayer();
 
             double damage = killer.getLastDamageCause().getFinalDamage();
+            String hand = ((Player) killer).getItemInHand().getType().toString();
             File file = this.Filed("LoggerMine/logs/killers/", this.DateTime("dd-MM-yyyy"));
 
-            this.Logs(file, this.World(player) + "," + this.Cords(player) + "," + this.DateTime("dd-MM-yyyy kk:mm:ss") + "," + damage + "," + player.getDisplayName() + ":" + player.getLevel() + "," + ((Player) killer).getDisplayName());
+            this.Logs(file, this.World(player) + "," + this.Cords(player) + "," + this.DateTime("dd-MM-yyyy kk:mm:ss") + "," + damage + "," + player.getDisplayName() + ":" + player.getLevel() + "," + ((Player) killer).getDisplayName() + ":" + hand);
         }
 
     }
