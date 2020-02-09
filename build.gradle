@@ -19,5 +19,4 @@ repositories {
 
 dependencies {
     compile name: "bukkit-1.7.10"
-    compile name: "craftbukkit-1.7.10"
 }
