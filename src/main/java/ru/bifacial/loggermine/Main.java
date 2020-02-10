@@ -55,17 +55,9 @@ public class Main extends JavaPlugin implements Listener {
 
     public void createConfig() {
         this.getConfig().options().header("Plugin by Bifacial");
-        if (!this.getConfig().isBoolean("LogCommand")) {
-            this.getConfig().set("LogCommand", true);
-        }
-
-        if (!this.getConfig().isBoolean("LogCommandOneFile")) {
-            this.getConfig().set("LogCommandOneFile", false);
-        }
-
-        if (!this.getConfig().isBoolean("LogKillerUser")) {
-            this.getConfig().set("LogKillerUser", true);
-        }
+        this.getConfig().set("LogCommand", true);
+        this.getConfig().set("LogCommandOneFile", true);
+        this.getConfig().set("LogKillerUser", true);
 
         this.saveConfig();
     }
@@ -121,7 +113,7 @@ public class Main extends JavaPlugin implements Listener {
     }
 
     @EventHandler(
-            priority = EventPriority.LOWEST
+            priority = EventPriority.HIGH
     )
     public void SaveKiller(PlayerDeathEvent e) throws Exception {
         Player p = e.getEntity();
