@@ -23,9 +23,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin implements Listener {
     public void onEnable() {
-        if (!(new File(this.getDataFolder(), "config.yml")).exists()) {
-            this.createConfig();
-        }
+        this.saveDefaultConfig();
 
         Bukkit.getPluginManager().registerEvents(this, this);
     }
@@ -53,15 +51,6 @@ public class Main extends JavaPlugin implements Listener {
         }
     }
 
-    public void createConfig() {
-        this.getConfig().options().header("Plugin by Bifacial");
-        this.getConfig().set("LogCommand", true);
-        this.getConfig().set("LogCommandOneFile", true);
-        this.getConfig().set("LogKillerUser", true);
-
-        this.saveConfig();
-    }
-
     public String Cords(Player player) {
         Location cords = player.getLocation();
         return Math.ceil(cords.getX()) + "|" + Math.ceil(cords.getY()) + "|" + Math.ceil(cords.getZ());
@@ -76,7 +65,7 @@ public class Main extends JavaPlugin implements Listener {
     }
 
     public String Login(Player player) {
-        return player.getDisplayName();
+        return player.getName();
     }
 
     public String DateTime(String format) {
@@ -129,7 +118,7 @@ public class Main extends JavaPlugin implements Listener {
 
             File file = this.Filed("LoggerMine/logs/killers/", this.DateTime("dd-MM-yyyy"));
 
-            this.Logs(file, this.World(player) + "," + this.Cords(player) + "," + this.DateTime("dd-MM-yyyy kk:mm:ss") + "," + damage + "," + player.getDisplayName() + ":" + player.getLevel() + "," + k.getDisplayName() + "/" + hand + ":" + enchants);
+            this.Logs(file, this.World(player) + "," + this.Cords(player) + "," + this.DateTime("dd-MM-yyyy kk:mm:ss") + "," + damage + "," + player.getName() + ":" + player.getLevel() + "," + k.getName() + "/" + hand + ":" + enchants);
         }
 
     }
@@ -143,7 +132,7 @@ public class Main extends JavaPlugin implements Listener {
             boolean setting = this.getConfig().getBoolean("LogCommandOneFile");
 
             String path = setting ? "LoggerMine/logs/commands/" : "LoggerMine/logs/commands/players/";
-            String name = setting ? this.DateTime("dd-MM-yyyy") : player.getDisplayName();
+            String name = setting ? this.DateTime("dd-MM-yyyy") : player.getName();
 
             File file = this.Filed(path, name);
             this.Logs(file, this.Line(player, e.getMessage()));

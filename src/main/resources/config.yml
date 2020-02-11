@@ -1,0 +1,4 @@
+#Plugin by Bifacial
+LogCommand: true
+LogKillerUser: true
+LogCommandOneFile: true
